@@ -37,9 +37,4 @@
     <ProjectReference Include="..\Entity\Entity.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="OpenAPIs\kpspublic.asmx" ClassName="MernisServiceReference" />
-    <None Update="OpenAPIs\kpspublic2.asmx" ClassName="MernisService" />
-  </ItemGroup>
-
 </Project>

@@ -5,6 +5,6 @@ namespace DataAccess.Abstract
 {
     public interface IGameDal : IEntityRepository<Game>
     {
-
+        
     }
 }
