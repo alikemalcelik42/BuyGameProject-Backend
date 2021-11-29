@@ -1,7 +1,7 @@
 ﻿using Entity.Concrete;
 using FluentValidation;
 
-namespace Business.ValidationRules.Autofac
+namespace Business.ValidationRules.FluentValidation
 {
     public class GamerValidator : AbstractValidator<Gamer>
     {

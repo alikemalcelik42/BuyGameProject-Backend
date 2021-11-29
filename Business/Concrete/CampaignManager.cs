@@ -1,7 +1,8 @@
 ﻿using Business.Abstract;
 using Business.Constants;
-using Business.ValidationRules.Autofac;
+using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Secure;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
@@ -21,6 +22,7 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(CampaignValidator))]
         [CacheRemoveAspect("ICampaignService.Get")]
+        [SecuredOperation("admin,campaign.add")]
         public IResult Add(Campaign campaign)
         {
             _campaignDal.Add(campaign);
@@ -29,6 +31,7 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(CampaignValidator))]
         [CacheRemoveAspect("ICampaignService.Get")]
+        [SecuredOperation("admin,campaign.delete")]
         public IResult Delete(Campaign campaign)
         {
             _campaignDal.Delete(campaign);
@@ -54,6 +57,7 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(CampaignValidator))]
         [CacheRemoveAspect("ICampaignService.Get")]
+        [SecuredOperation("admin,campaign.update")]
         public IResult Update(Campaign campaign)
         {
             _campaignDal.Update(campaign);

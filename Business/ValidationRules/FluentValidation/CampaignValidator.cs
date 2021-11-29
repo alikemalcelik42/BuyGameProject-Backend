@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.ValidationRules.Autofac
+namespace Business.ValidationRules.FluentValidation
 {
 
     public class CampaignValidator : AbstractValidator<Campaign>

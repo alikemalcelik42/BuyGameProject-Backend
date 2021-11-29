@@ -1,7 +1,8 @@
 ﻿using Business.Abstract;
 using Business.Constants;
-using Business.ValidationRules.Autofac;
+using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Secure;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
@@ -26,6 +27,7 @@ namespace Business.Concrete
 
         [CacheRemoveAspect("IGameService.Get")]
         [ValidationAspect(typeof(GameValidator))]
+        [SecuredOperation("admin,game.add")]
         public IResult Add(Game game)
         {
             _gameDal.Add(game);
@@ -34,6 +36,7 @@ namespace Business.Concrete
 
         [CacheRemoveAspect("IGameService.Get")]
         [ValidationAspect(typeof(GameValidator))]
+        [SecuredOperation("admin,game.delete")]
         public IResult Delete(Game game)
         {
             _gameDal.Delete(game);
@@ -59,6 +62,7 @@ namespace Business.Concrete
 
         [CacheRemoveAspect("IGameService.Get")]
         [ValidationAspect(typeof(GameValidator))]
+        [SecuredOperation("admin,game.update")]
         public IResult Update(Game game)
         {
             _gameDal.Update(game);

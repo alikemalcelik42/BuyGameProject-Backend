@@ -23,10 +23,13 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EfGameDal>().As<IGameDal>().SingleInstance();
 
             builder.RegisterType<GamerManager>().As<IGamerService>().SingleInstance();
-            builder.RegisterType<EfGameDal>().As<IGamerDal>().SingleInstance();
+            builder.RegisterType<EfGamerDal>().As<IGamerDal>().SingleInstance();
 
             builder.RegisterType<CampaignManager>().As<ICampaignService>().SingleInstance();
             builder.RegisterType<EfCampaignDal>().As<ICampaignDal>().SingleInstance();
+
+            builder.RegisterType<SaleManager>().As<ISaleService>().SingleInstance();
+            builder.RegisterType<EfSaleDal>().As<ISaleDal>().SingleInstance();
 
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<EfUserDal>().As<IUserDal>();

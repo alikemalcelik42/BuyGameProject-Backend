@@ -25,10 +25,16 @@ namespace Business.Constants
         public static string GamerDeleted = "Oyuncu silindi";
         public static string GamersListed = "Oyuncular listelendi";
         public static string GamerUpdated = "Oyuncu güncellendi";
+        public static string InfosWrong = "Bilgiler hatalı";
 
         public static string CampaignAdded = "Kampanya eklendi";
         public static string CampaignDeleted = "Kampanya silindi";
         public static string CampaignsListed = "Kampanyalar listlendi";
         public static string CampaignUpdated = "Kampanya güncellendi";
+
+        public static string SalesListed = "Satışlar listelendi";
+        public static string SaleUpdated = "Satış güncellendi";
+        public static string SaleDeleted = "Satış silindi";
+        public static string SaleAdded = "Satış eklendi";
     }
 }

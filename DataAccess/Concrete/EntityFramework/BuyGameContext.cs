@@ -22,5 +22,6 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Game> Games { get; set; }
         public DbSet<Gamer> Gamers { get; set; }
         public DbSet<Campaign> Campaigns { get; set; }
+        public DbSet<Sale> Sales { get; set; }
     }
 }
