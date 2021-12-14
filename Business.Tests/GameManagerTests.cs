@@ -1,11 +1,14 @@
 using Business.Concrete;
+using Core.Entites.Abstract;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entity.Concrete;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Business.Tests
 {
@@ -33,7 +36,7 @@ namespace Business.Tests
                 UnitPrice = 50
                 }
             };
-            _mockGameDal.Setup(g => g.GetAll(null)).Returns(_dbGames); 
+            _mockGameDal.Setup(g => g.GetAll(null)).Returns(_dbGames);
         }
 
         [TestMethod]
@@ -41,7 +44,7 @@ namespace Business.Tests
         {
             GameManager gameManager = new GameManager(_mockGameDal.Object);
             var data = gameManager.GetAll();
-            Assert.IsNotNull(data);
+            Assert.AreEqual(2, data.Data.Count);
         }
     }
 }

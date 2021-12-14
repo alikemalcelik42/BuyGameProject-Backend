@@ -7,7 +7,8 @@ namespace Business.ValidationRules.FluentValidation
     {
         public GamerValidator()
         {
-            RuleFor(g => g.NationalNumber).Length(11).NotEmpty();
+            RuleFor(g => g.NationalNumber).Length(11);
+            RuleFor(g => g.IdentificationNumber).Length(16);
         }
     }
 }

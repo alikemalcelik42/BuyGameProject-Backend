@@ -2,8 +2,10 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Logging;
 using Core.Aspects.Autofac.Secure;
 using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Logging.Concrete;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -22,7 +24,8 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(CampaignValidator))]
         [CacheRemoveAspect("ICampaignService.Get")]
-        [SecuredOperation("admin,campaign.add")]
+        // [SecuredOperation("admin,campaign.add")]
+        [LogAspect(typeof(FileLogger))]
         public IResult Add(Campaign campaign)
         {
             _campaignDal.Add(campaign);
@@ -31,7 +34,8 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(CampaignValidator))]
         [CacheRemoveAspect("ICampaignService.Get")]
-        [SecuredOperation("admin,campaign.delete")]
+        // [SecuredOperation("admin,campaign.delete")]
+        [LogAspect(typeof(FileLogger))]
         public IResult Delete(Campaign campaign)
         {
             _campaignDal.Delete(campaign);
@@ -57,7 +61,8 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(CampaignValidator))]
         [CacheRemoveAspect("ICampaignService.Get")]
-        [SecuredOperation("admin,campaign.update")]
+        [LogAspect(typeof(FileLogger))]
+        // [SecuredOperation("admin,campaign.update")]
         public IResult Update(Campaign campaign)
         {
             _campaignDal.Update(campaign);

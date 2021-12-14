@@ -7,8 +7,8 @@ namespace Business.ValidationRules.FluentValidation
     {
         public GameValidator()
         {
-            RuleFor(g => g.Name).MinimumLength(5).MaximumLength(200).NotEmpty();
-            RuleFor(g => g.UnitPrice).GreaterThan(0).NotEmpty();
+            RuleFor(g => g.Name).MinimumLength(5).MaximumLength(200);
+            RuleFor(g => g.UnitPrice).GreaterThan(0);
         }
     }
 }

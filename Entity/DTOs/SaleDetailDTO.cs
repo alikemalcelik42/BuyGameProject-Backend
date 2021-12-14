@@ -16,5 +16,6 @@ namespace Entity.DTOs
         public bool GamerStatus { get; set; }
         public string GameName { get; set; }
         public decimal GameUnitPrice { get; set; }
+        public DateTime SaleDate { get; set; }
     }
 }

@@ -13,9 +13,9 @@ namespace Business.ValidationRules.FluentValidation
     {
         public CampaignValidator()
         {
-            RuleFor(c => c.Name).MinimumLength(3).MaximumLength(5).NotEmpty();
-            RuleFor(c => c.DiscountPercentage).GreaterThan(0).NotEmpty();
-            RuleFor(c => c.FinishDate).GreaterThan(DateTime.Now).NotEmpty();
+            RuleFor(c => c.Name).MinimumLength(3).MaximumLength(50);
+            RuleFor(c => c.DiscountPercentage).GreaterThan(0).LessThan(100);
+            RuleFor(c => c.FinishDate).GreaterThan(DateTime.Now);
         }
     }
 }

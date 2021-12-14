@@ -13,5 +13,6 @@ namespace Entity.Concrete
         public int GamerId { get; set; }
         public int GameId { get; set; }
         public decimal Amount { get; set; }
+        public DateTime SaleDate { get; set; }
     }
 }

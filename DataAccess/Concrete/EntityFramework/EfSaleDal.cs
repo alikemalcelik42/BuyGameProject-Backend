@@ -27,6 +27,7 @@ namespace DataAccess.Concrete.EntityFramework
                                       GamerStatus = u.Status,
                                       GameName = game.Name,
                                       GameUnitPrice = game.UnitPrice,
+                                      SaleDate = s.SaleDate
                                   };
 
                 return saleDetails.ToList();

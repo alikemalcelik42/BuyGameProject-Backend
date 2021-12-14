@@ -2,8 +2,11 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Logging;
+using Core.Aspects.Autofac.Performance;
 using Core.Aspects.Autofac.Secure;
 using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Logging.Concrete;
 using Core.Utilities.Business;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
@@ -24,7 +27,8 @@ namespace Business.Concrete
 
         [CacheRemoveAspect("IGamerService.Get")]
         [ValidationAspect(typeof(GamerValidator))]
-        [SecuredOperation("admin,gamer.add")]
+        // [SecuredOperation("admin,gamer.add")]
+        [LogAspect(typeof(FileLogger))]
         public IResult Add(Gamer gamer)
         {
             _gamerDal.Add(gamer);
@@ -33,7 +37,8 @@ namespace Business.Concrete
 
         [CacheRemoveAspect("IGamerService.Get")]
         [ValidationAspect(typeof(GamerValidator))]
-        [SecuredOperation("admin,gamer.delete")]
+        // [SecuredOperation("admin,gamer.delete")]
+        [LogAspect(typeof(FileLogger))]
         public IResult Delete(Gamer gamer)
         {
             _gamerDal.Delete(gamer);
@@ -51,6 +56,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Gamer>(_gamerDal.Get(g => g.Id == id), Messages.GamersListed);
         }
 
+        [PerformanceAspect(3)]
         [CacheAspect]
         public IDataResult<List<GamerDetailDto>> GetGamerDetails()
         {
@@ -59,7 +65,8 @@ namespace Business.Concrete
 
         [CacheRemoveAspect("IGamerService.Get")]
         [ValidationAspect(typeof(GamerValidator))]
-        [SecuredOperation("admin,gamer.update")]
+        // [SecuredOperation("admin,gamer.update")]
+        [LogAspect(typeof(FileLogger))]
         public IResult Update(Gamer gamer)
         {
             _gamerDal.Update(gamer);
