@@ -25,7 +25,7 @@ namespace Business.Concrete
 
         [CacheRemoveAspect("IGameService.Get")]
         [ValidationAspect(typeof(GameValidator))]
-        // [SecuredOperation("admin,game.add")]
+        [SecuredOperation("admin,game.add")]
         [LogAspect(typeof(FileLogger))]
         public IResult Add(Game game)
         {
@@ -35,7 +35,7 @@ namespace Business.Concrete
 
         [CacheRemoveAspect("IGameService.Get")]
         [ValidationAspect(typeof(GameValidator))]
-        // [SecuredOperation("admin,game.delete")]
+        [SecuredOperation("admin,game.delete")]
         [LogAspect(typeof(FileLogger))]
         public IResult Delete(Game game)
         {
@@ -63,7 +63,7 @@ namespace Business.Concrete
 
         [CacheRemoveAspect("IGameService.Get")]
         [ValidationAspect(typeof(GameValidator))]
-        // [SecuredOperation("admin,game.update")]
+        [SecuredOperation("admin,game.update")]
         [LogAspect(typeof(FileLogger))]
         public IResult Update(Game game)
         {

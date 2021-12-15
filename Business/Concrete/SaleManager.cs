@@ -29,7 +29,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("ISaleService.Get")]
-        // [SecuredOperation("admin,sale.add")]
+        [SecuredOperation("admin,sale.add")]
         [LogAspect(typeof(FileLogger))]
         public IResult Add(Sale sale)
         {
@@ -39,7 +39,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("ISaleService.Get")]
-        // [SecuredOperation("admin,sale.add")]
+        [SecuredOperation("admin,sale.add")]
         [LogAspect(typeof(FileLogger))]
         public IResult AddWithCampaigns(Sale sale)
         {
@@ -58,7 +58,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("ISaleService.Get")]
-        // [SecuredOperation("admin,sale.delete")]
+        [SecuredOperation("admin,sale.delete")]
         [LogAspect(typeof(FileLogger))]
         public IResult Delete(Sale sale)
         {
@@ -96,7 +96,7 @@ namespace Business.Concrete
 
         [CacheRemoveAspect("ISaleService.Get")]
         [ValidationAspect(typeof(GameValidator))]
-        // [SecuredOperation("admin,sale.update")]
+        [SecuredOperation("admin,sale.update")]
         [LogAspect(typeof(FileLogger))]
         public IResult Update(Sale sale)
         {

@@ -24,7 +24,7 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(CampaignValidator))]
         [CacheRemoveAspect("ICampaignService.Get")]
-        // [SecuredOperation("admin,campaign.add")]
+        [SecuredOperation("admin,campaign.add")]
         [LogAspect(typeof(FileLogger))]
         public IResult Add(Campaign campaign)
         {
@@ -34,7 +34,7 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(CampaignValidator))]
         [CacheRemoveAspect("ICampaignService.Get")]
-        // [SecuredOperation("admin,campaign.delete")]
+        [SecuredOperation("admin,campaign.delete")]
         [LogAspect(typeof(FileLogger))]
         public IResult Delete(Campaign campaign)
         {
@@ -62,7 +62,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CampaignValidator))]
         [CacheRemoveAspect("ICampaignService.Get")]
         [LogAspect(typeof(FileLogger))]
-        // [SecuredOperation("admin,campaign.update")]
+        [SecuredOperation("admin,campaign.update")]
         public IResult Update(Campaign campaign)
         {
             _campaignDal.Update(campaign);
