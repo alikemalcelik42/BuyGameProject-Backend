@@ -1,12 +1,13 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Exception;
 using Core.Aspects.Autofac.Logging;
 using Core.Aspects.Autofac.Performance;
-using Core.Aspects.Autofac.Secure;
 using Core.Aspects.Autofac.Validation;
-using Core.CrossCuttingConcerns.Logging.Concrete;
+using Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -31,6 +32,7 @@ namespace Business.Concrete
         [CacheRemoveAspect("ISaleService.Get")]
         [SecuredOperation("admin,sale.add")]
         [LogAspect(typeof(FileLogger))]
+        [ExceptionLogAspect(typeof(FileLogger))]
         public IResult Add(Sale sale)
         {
             sale.Amount = _gameService.GetById(sale.GameId).Data.UnitPrice;
@@ -41,6 +43,7 @@ namespace Business.Concrete
         [CacheRemoveAspect("ISaleService.Get")]
         [SecuredOperation("admin,sale.add")]
         [LogAspect(typeof(FileLogger))]
+        [ExceptionLogAspect(typeof(FileLogger))]
         public IResult AddWithCampaigns(Sale sale)
         {
             var result = _campaignService.GetAllValids();
@@ -48,7 +51,7 @@ namespace Business.Concrete
 
             if (result.Success)
             {
-                foreach(var campaign in result.Data)
+                foreach (var campaign in result.Data)
                 {
                     sale.Amount -= sale.Amount * (decimal)campaign.DiscountPercentage / (decimal)100;
                 }
@@ -86,7 +89,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<Sale>(_saleDal.Get(s => s.Id == id), Messages.SalesListed);
         }
-        
+
         [PerformanceAspect(3)]
         [CacheAspect]
         public IDataResult<List<SaleDetailDTO>> GetSaleDetails()
@@ -98,6 +101,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(GameValidator))]
         [SecuredOperation("admin,sale.update")]
         [LogAspect(typeof(FileLogger))]
+        [ExceptionLogAspect(typeof(FileLogger))]
         public IResult Update(Sale sale)
         {
             _saleDal.Update(sale);

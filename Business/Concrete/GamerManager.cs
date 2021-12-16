@@ -1,13 +1,13 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Exception;
 using Core.Aspects.Autofac.Logging;
 using Core.Aspects.Autofac.Performance;
-using Core.Aspects.Autofac.Secure;
 using Core.Aspects.Autofac.Validation;
-using Core.CrossCuttingConcerns.Logging.Concrete;
-using Core.Utilities.Business;
+using Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -29,6 +29,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(GamerValidator))]
         [SecuredOperation("admin,gamer.add")]
         [LogAspect(typeof(FileLogger))]
+        [ExceptionLogAspect(typeof(FileLogger))]
         public IResult Add(Gamer gamer)
         {
             _gamerDal.Add(gamer);
@@ -36,9 +37,9 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("IGamerService.Get")]
-        [ValidationAspect(typeof(GamerValidator))]
         [SecuredOperation("admin,gamer.delete")]
         [LogAspect(typeof(FileLogger))]
+        [ExceptionLogAspect(typeof(FileLogger))]
         public IResult Delete(Gamer gamer)
         {
             _gamerDal.Delete(gamer);
@@ -67,6 +68,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(GamerValidator))]
         [SecuredOperation("admin,gamer.update")]
         [LogAspect(typeof(FileLogger))]
+        [ExceptionLogAspect(typeof(FileLogger))]
         public IResult Update(Gamer gamer)
         {
             _gamerDal.Update(gamer);

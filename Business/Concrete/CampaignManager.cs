@@ -1,11 +1,12 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Exception;
 using Core.Aspects.Autofac.Logging;
-using Core.Aspects.Autofac.Secure;
 using Core.Aspects.Autofac.Validation;
-using Core.CrossCuttingConcerns.Logging.Concrete;
+using Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -26,16 +27,17 @@ namespace Business.Concrete
         [CacheRemoveAspect("ICampaignService.Get")]
         [SecuredOperation("admin,campaign.add")]
         [LogAspect(typeof(FileLogger))]
+        [ExceptionLogAspect(typeof(FileLogger))]
         public IResult Add(Campaign campaign)
         {
             _campaignDal.Add(campaign);
             return new SuccessResult(Messages.CampaignAdded);
         }
 
-        [ValidationAspect(typeof(CampaignValidator))]
         [CacheRemoveAspect("ICampaignService.Get")]
         [SecuredOperation("admin,campaign.delete")]
         [LogAspect(typeof(FileLogger))]
+        [ExceptionLogAspect(typeof(FileLogger))]
         public IResult Delete(Campaign campaign)
         {
             _campaignDal.Delete(campaign);
@@ -63,6 +65,7 @@ namespace Business.Concrete
         [CacheRemoveAspect("ICampaignService.Get")]
         [LogAspect(typeof(FileLogger))]
         [SecuredOperation("admin,campaign.update")]
+        [ExceptionLogAspect(typeof(FileLogger))]
         public IResult Update(Campaign campaign)
         {
             _campaignDal.Update(campaign);

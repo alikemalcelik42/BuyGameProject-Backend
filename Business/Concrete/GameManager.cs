@@ -1,12 +1,13 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Exception;
 using Core.Aspects.Autofac.Logging;
 using Core.Aspects.Autofac.Performance;
-using Core.Aspects.Autofac.Secure;
 using Core.Aspects.Autofac.Validation;
-using Core.CrossCuttingConcerns.Logging.Concrete;
+using Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -27,6 +28,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(GameValidator))]
         [SecuredOperation("admin,game.add")]
         [LogAspect(typeof(FileLogger))]
+        [ExceptionLogAspect(typeof(FileLogger))]
         public IResult Add(Game game)
         {
             _gameDal.Add(game);
@@ -34,16 +36,15 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("IGameService.Get")]
-        [ValidationAspect(typeof(GameValidator))]
         [SecuredOperation("admin,game.delete")]
         [LogAspect(typeof(FileLogger))]
+        [ExceptionLogAspect(typeof(FileLogger))]
         public IResult Delete(Game game)
         {
             _gameDal.Delete(game);
             return new SuccessResult(Messages.GameDeleted);
         }
 
-        [PerformanceAspect(3)]
         [CacheAspect]
         public IDataResult<List<Game>> GetAll()
         {
@@ -65,6 +66,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(GameValidator))]
         [SecuredOperation("admin,game.update")]
         [LogAspect(typeof(FileLogger))]
+        [ExceptionLogAspect(typeof(FileLogger))]
         public IResult Update(Game game)
         {
             _gameDal.Update(game);
